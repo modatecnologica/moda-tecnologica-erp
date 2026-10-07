@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Moda Tecnologica ERP es una aplicacion de escritorio de gestion empresarial utilizada por Moda Tecnologica.">
+  <title>Moda Tecnologica ERP</title>
+  <style>
+    :root {
+      --bg: #020817;
+      --panel: #071426;
+      --panel-soft: #0b1b31;
+      --text: #eef7ff;
+      --muted: #a8bfd6;
+      --line: #1d3b5f;
+      --neon: #00d5ff;
+      --neon-soft: rgba(0, 213, 255, 0.16);
+      --white-soft: rgba(255, 255, 255, 0.07);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top right, rgba(0, 213, 255, 0.14), transparent 34rem),
+        linear-gradient(180deg, #020817 0%, #05101f 52%, #020817 100%);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .page {
+      min-height: 100vh;
+    }
+
+    .nav {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 24px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border: 1px solid rgba(0, 213, 255, 0.65);
+      background: linear-gradient(135deg, rgba(0, 213, 255, 0.22), rgba(255, 255, 255, 0.05));
+      display: grid;
+      place-items: center;
+      color: var(--neon);
+      font-weight: 800;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-links a,
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: color 160ms ease, border-color 160ms ease;
+    }
+
+    .nav-links a:hover,
+    .footer-links a:hover {
+      color: var(--text);
+      border-color: var(--neon);
+    }
+
+    .hero {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 76px 0 56px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.18fr) minmax(280px, 0.82fr);
+      gap: 42px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      color: var(--neon);
+      font-size: 0.88rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin: 0 0 14px;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      font-size: clamp(2.6rem, 7vw, 5.7rem);
+      line-height: 0.96;
+      margin-bottom: 24px;
+      letter-spacing: 0;
+    }
+
+    .hero-copy {
+      max-width: 720px;
+      color: #d8e8f8;
+      font-size: clamp(1.04rem, 2vw, 1.22rem);
+      margin-bottom: 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 10px 18px;
+      border: 1px solid rgba(0, 213, 255, 0.58);
+      color: var(--text);
+      text-decoration: none;
+      background: rgba(0, 213, 255, 0.12);
+      font-weight: 700;
+    }
+
+    .button.secondary {
+      border-color: var(--line);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--muted);
+    }
+
+    .hero-panel {
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(11, 27, 49, 0.92), rgba(7, 20, 38, 0.78));
+      padding: 24px;
+      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.28);
+    }
+
+    .system-lines {
+      display: grid;
+      gap: 12px;
+    }
+
+    .system-line {
+      padding: 14px;
+      border: 1px solid rgba(29, 59, 95, 0.86);
+      background: rgba(255, 255, 255, 0.035);
+      color: #dbeafe;
+    }
+
+    .system-line strong {
+      display: block;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    main {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding-bottom: 72px;
+    }
+
+    section {
+      padding: 56px 0;
+      border-top: 1px solid rgba(29, 59, 95, 0.64);
+    }
+
+    .section-head {
+      max-width: 760px;
+      margin-bottom: 26px;
+    }
+
+    h2 {
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      line-height: 1.08;
+      margin-bottom: 16px;
+      letter-spacing: 0;
+    }
+
+    .section-head p,
+    .feature p,
+    .integration-copy p {
+      color: var(--muted);
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .feature {
+      min-height: 170px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      background: rgba(7, 20, 38, 0.78);
+    }
+
+    .feature h3 {
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+    }
+
+    .marketing-grid,
+    .integration-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 0.86fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .content-panel {
+      border: 1px solid var(--line);
+      background: rgba(7, 20, 38, 0.78);
+      padding: 24px;
+    }
+
+    .highlight-panel {
+      border: 1px solid rgba(0, 213, 255, 0.42);
+      background: var(--neon-soft);
+      padding: 24px;
+    }
+
+    .check-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .check-list li {
+      color: #dbeafe;
+      padding-left: 22px;
+      position: relative;
+    }
+
+    .check-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.72em;
+      width: 8px;
+      height: 8px;
+      background: var(--neon);
+      box-shadow: 0 0 16px rgba(0, 213, 255, 0.9);
+    }
+
+    .legal-band {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 24px;
+      border: 1px solid rgba(0, 213, 255, 0.42);
+      background: linear-gradient(90deg, rgba(0, 213, 255, 0.14), rgba(255, 255, 255, 0.04));
+    }
+
+    .legal-band p {
+      color: var(--muted);
+      margin-bottom: 0;
+    }
+
+    .legal-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      flex-shrink: 0;
+    }
+
+    footer {
+      border-top: 1px solid rgba(29, 59, 95, 0.64);
+      background: rgba(2, 8, 23, 0.72);
+    }
+
+    .footer-inner {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 28px 0;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      color: var(--muted);
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 920px) {
+      .hero,
+      .marketing-grid,
+      .integration-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .features {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav,
+      .legal-band,
+      .footer-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav-links {
+        justify-content: flex-start;
+      }
+
+      .hero {
+        padding-top: 46px;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      .legal-actions,
+      .hero-actions {
+        width: 100%;
+      }
+
+      .button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <nav class="nav" aria-label="Navegacion principal">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true">MT</div>
+          <span>Moda Tecnologica ERP</span>
+        </div>
+        <div class="nav-links">
+          <a href="#funciones">Funciones</a>
+          <a href="#marketing">Marketing</a>
+          <a href="#tiktok">TikTok</a>
+          <a href="terms.html">Terms of Service</a>
+          <a href="privacy.html">Privacy Policy</a>
+        </div>
+      </nav>
+
+      <section class="hero" aria-labelledby="hero-title">
+        <div>
+          <p class="eyebrow">Gestion empresarial para Moda Tecnologica</p>
+          <h1 id="hero-title">Moda Tecnologica ERP</h1>
+          <p class="hero-copy">
+            Moda Tecnologica ERP es una aplicacion de escritorio de gestion empresarial utilizada por Moda Tecnologica para organizar operaciones internas, controlar informacion comercial y preparar contenido para redes sociales.
+          </p>
+          <div class="hero-actions">
+            <a class="button" href="#tiktok">Integracion con TikTok</a>
+            <a class="button secondary" href="privacy.html">Ver Privacy Policy</a>
+          </div>
+        </div>
+
+        <div class="hero-panel" aria-label="Resumen del sistema">
+          <div class="system-lines">
+            <div class="system-line">
+              <strong>Aplicacion de escritorio</strong>
+              Gestion diaria para el equipo operativo de Moda Tecnologica.
+            </div>
+            <div class="system-line">
+              <strong>Control comercial</strong>
+              Inventario, ventas, finanzas y reportes en un solo flujo de trabajo.
+            </div>
+            <div class="system-line">
+              <strong>Marketing conectado</strong>
+              Preparacion de piezas y publicaciones para redes sociales con autorizacion del usuario.
+            </div>
+          </div>
+        </div>
+      </section>
+    </header>
+
+    <main>
+      <section id="funciones" aria-labelledby="funciones-title">
+        <div class="section-head">
+          <p class="eyebrow">Funciones generales</p>
+          <h2 id="funciones-title">Un sistema central para la operacion diaria</h2>
+          <p>
+            El ERP ayuda a Moda Tecnologica a mantener ordenados los procesos principales del negocio, con informacion clara para tomar decisiones y trabajar con mayor control.
+          </p>
+        </div>
+
+        <div class="features">
+          <article class="feature">
+            <h3>Inventario</h3>
+            <p>Organizacion de productos, disponibilidad y datos importantes de cada articulo.</p>
+          </article>
+          <article class="feature">
+            <h3>Ventas</h3>
+            <p>Apoyo para registrar operaciones comerciales y dar seguimiento a informacion de clientes.</p>
+          </article>
+          <article class="feature">
+            <h3>Control financiero</h3>
+            <p>Vista interna para pagos, compromisos, saldos y seguimiento financiero del negocio.</p>
+          </article>
+          <article class="feature">
+            <h3>Reportes</h3>
+            <p>Resumenes utiles para revisar rendimiento, pendientes y actividad operativa.</p>
+          </article>
+          <article class="feature">
+            <h3>Marketing</h3>
+            <p>Preparacion de contenido comercial para publicaciones en redes sociales.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="marketing" aria-labelledby="marketing-title">
+        <div class="marketing-grid">
+          <div class="content-panel">
+            <p class="eyebrow">Modulo de Marketing</p>
+            <h2 id="marketing-title">Contenido comercial listo para redes sociales</h2>
+            <p>
+              El modulo de Marketing permite trabajar con imagenes de productos, preparar informacion comercial y generar textos de apoyo para publicaciones. Esta area facilita la creacion de contenido consistente con la identidad de Moda Tecnologica.
+            </p>
+            <p>
+              El usuario mantiene control sobre la revision final del contenido antes de compartirlo o publicarlo en cualquier plataforma conectada.
+            </p>
+          </div>
+
+          <aside class="highlight-panel" aria-label="Capacidades de Marketing">
+            <ul class="check-list">
+              <li>Seleccion y preparacion de imagenes para publicaciones.</li>
+              <li>Captions comerciales para distintos canales sociales.</li>
+              <li>Revision del contenido antes de publicar.</li>
+              <li>Flujo de trabajo alineado con la comunicacion de Moda Tecnologica.</li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <section id="tiktok" aria-labelledby="tiktok-title">
+        <div class="integration-grid">
+          <div class="content-panel">
+            <p class="eyebrow">Integracion con TikTok</p>
+            <h2 id="tiktok-title">Conexion autorizada por el usuario</h2>
+            <p>
+              Moda Tecnologica ERP integra TikTok mediante Login Kit y Content Posting API para permitir que una cuenta autorizada conecte el sistema y publique contenido preparado desde el modulo de Marketing.
+            </p>
+            <p>
+              La conexion requiere autorizacion del usuario. El usuario controla la cuenta conectada, revisa el contenido y mantiene el control de las publicaciones que decide realizar.
+            </p>
+          </div>
+
+          <aside class="highlight-panel" aria-label="Seguridad y autorizacion">
+            <ul class="check-list">
+              <li>Login Kit se utiliza para autorizar la cuenta de TikTok.</li>
+              <li>Content Posting API se utiliza para enviar contenido aprobado por el usuario.</li>
+              <li>El sistema no publica sin accion y autorizacion del usuario.</li>
+              <li>El acceso puede ser revocado desde la configuracion de la cuenta de TikTok.</li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <section aria-labelledby="legal-title">
+        <div class="legal-band">
+          <div>
+            <p class="eyebrow">Informacion legal</p>
+            <h2 id="legal-title">Terminos y privacidad</h2>
+            <p>
+              Consulta las politicas publicas de Moda Tecnologica ERP para conocer las condiciones de uso y el manejo de privacidad.
+            </p>
+          </div>
+          <div class="legal-actions">
+            <a class="button" href="terms.html">Terms of Service</a>
+            <a class="button secondary" href="privacy.html">Privacy Policy</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-inner">
+        <div>
+          <strong>Moda Tecnologica ERP</strong><br>
+          Aplicacion de escritorio de gestion empresarial utilizada por Moda Tecnologica.
+        </div>
+        <div class="footer-links">
+          <a href="terms.html">Terms of Service</a>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="mailto:modatecnologica507@gmail.com">Contacto</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
